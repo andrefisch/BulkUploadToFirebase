@@ -15,15 +15,15 @@ const settings = { timestampsInSnapshots: true };
 firestore.settings(settings);
 
 // upload fencer data
-// if (data && (typeof data === "object")) {
-//     Object.keys(data).forEach(docKey => {
-//         firestore.collection(collectionKey).doc(docKey).set(data[docKey]).then((res) => {
-//             console.log("Document " + docKey + " successfully written!");
-//         }).catch((error) => {
-//             console.error("Error writing document: ", error);
-//         });
-//     });
-// }
+if (data && (typeof data === "object")) {
+    Object.keys(data).forEach(docKey => {
+        firestore.collection(collectionKey).doc(docKey).set(data[docKey]).then((res) => {
+            console.log("Document " + docKey + " successfully written!");
+        }).catch((error) => {
+            console.error("Error writing document: ", error);
+        });
+    });
+}
 
 // upload referee 1 data
 if (data1 && (typeof data1 === "object")) {
