@@ -7,5 +7,5 @@ curl 'https://member.usafencing.org/referees/search?name_member_id_search=1002&d
 python csvtojson.py
 node `pwd`
 # Uncomment these lines to delete all csv and or json files if you want
-# rm *csv
+# rm r*csv
 # rm *json

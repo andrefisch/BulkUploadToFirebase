@@ -9,6 +9,7 @@ def convert_csv_to_json(csvFilePath, memberString):
     data = {} 
     # Open a csv reader called DictReader 
     with open(csvFilePath, encoding='utf-8') as csvf: 
+        rowNum = 0
         csvReader = csv.DictReader(csvf) 
         # Convert each row into a dictionary 
         # and add it to data 
@@ -23,12 +24,29 @@ def convert_csv_to_json(csvFilePath, memberString):
     with open(jsonFilePath, 'w', encoding='utf-8') as jsonf: 
         jsonf.write(json.dumps(data, indent=4)) 
 
+def murder_end_comma(csvFilePath):
+    fin = open(csvFilePath, "rt")
+    #output file to write the result to
+    fout = open('new' + csvFilePath, "wt")
+    #for each line in the input file
+    for line in fin:
+        #read replace the string and write to output file
+        temp = line
+        fout.write(temp[:-2] + temp[-1:])
+    #close input and output files
+    fin.close()
+    fout.close()
+
 # This will work for the members
 print('Now converting members.csv')
-convert_csv_to_json('members.csv', 'Member #')
+# convert_csv_to_json('members.csv', 'Member #')
 # This will work for the referees
 # Get all files starting with the word 'referee' in this directory
 files = [x for x in os.listdir() if x.startswith("referee")]
+for eachfile in files:
+    print("Now converting", eachfile)
+    murder_end_comma(eachfile)
+files = [x for x in os.listdir() if x.startswith("newreferee")]
 for eachfile in files:
     print("Now converting", eachfile)
     convert_csv_to_json(eachfile, 'Member Number')
