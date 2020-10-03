@@ -32,19 +32,22 @@ def murder_end_comma(csvFilePath):
     for line in fin:
         #read replace the string and write to output file
         temp = line
-        fout.write(temp[:-2] + temp[-1:])
+        if (temp[-2] == ','):
+            fout.write(temp[:-2] + temp[-1:])
+        else:
+            fout.write(temp)
     #close input and output files
     fin.close()
     fout.close()
 
 # This will work for the members
 print('Now converting members.csv')
-# convert_csv_to_json('members.csv', 'Member #')
+convert_csv_to_json('members.csv', 'Member #')
 # This will work for the referees
 # Get all files starting with the word 'referee' in this directory
 files = [x for x in os.listdir() if x.startswith("referee")]
 for eachfile in files:
-    print("Now converting", eachfile)
+    print("Murdering commas in", eachfile)
     murder_end_comma(eachfile)
 files = [x for x in os.listdir() if x.startswith("newreferee")]
 for eachfile in files:
