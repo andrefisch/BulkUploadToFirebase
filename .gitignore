@@ -1,5 +1,5 @@
 *node_modules
-
+*.vscode
 *members*.json
 *members*.csv
 *referee*.json
