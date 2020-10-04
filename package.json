@@ -1,0 +1,22 @@
+{
+  "name": "bulkuploadtofirebase",
+  "version": "1.0.0",
+  "description": "Upload bulk data to firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrefisch/BulkUploadToFirebase.git"
+  },
+  "author": "gpuccio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrefisch/BulkUploadToFirebase/issues"
+  },
+  "homepage": "https://github.com/andrefisch/BulkUploadToFirebase#readme",
+  "dependencies": {
+    "firebase-admin": "^9.2.0"
+  }
+}

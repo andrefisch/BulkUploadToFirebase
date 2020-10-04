@@ -1,2 +1,7 @@
-*.json
-*.csv
+*node_modules
+*.vscode
+*members*.json
+*members*.csv
+*referee*.json
+*referee*.csv
+*service*.json
