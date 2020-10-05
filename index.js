@@ -3,9 +3,9 @@ const serviceAccount = require("./serviceAccountKey.json");
 const collectionKey = "fencers";
 const data = require("./members.json");
 const collectionKey1 = "directors";
-const data1 = require("./referee1.json");
-const data2 = require("./referee2.json");
-const data3 = require("./referee3.json");
+const data1 = require("./newreferee1.json");
+const data2 = require("./newreferee2.json");
+const data3 = require("./newreferee3.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://intempo-19a70.firebaseio.com"
