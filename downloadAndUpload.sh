@@ -19,7 +19,7 @@ curl 'https://member.usafencing.org/referees/search?name_member_id_search=1002&d
 python csvtojson.py
 node `pwd`
 # Uncomment these lines to delete all csv and or json files if you want
-mkdir old
+# mkdir old
 # Clean out old folder
 rm old/*
 # Move all csv files to old folder
@@ -27,7 +27,7 @@ mv m*csv old
 mv newr*csv old
 # Delete all csv and json that remain
 rm *csv
-rm m*json
-rm n*json
+# rm m*json
+# rm n*json
 
 # We sleep for one minute between each cURL so we don't annoy the website
