@@ -13,6 +13,7 @@ def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
     changes = 0
     # Open a csv reader called DictReader 
     with open(csvFilePath, encoding='utf-8') as csvf: 
+        print("Now opening new CSV")
         rowNum = 0
         csvReader = csv.DictReader(csvf) 
         # Convert each row into a dictionary 
@@ -23,10 +24,13 @@ def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
             # be the primary key 
             key = rows[memberString]
             keys.append(key)
+            # we need an additional field for last name converted to lowercase
+            rows['Lowercase Last Name'] = (rows['Last Name']).lower()
             datanew[key] = rows
 
     try:
         with open(oldCsvFilePath, encoding='utf-8') as csvf2: 
+            print("Now comparing to old CSV")
             rowNum = 0
             csvReader2 = csv.DictReader(csvf2) 
             # Convert each row into a dictionary 
