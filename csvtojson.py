@@ -1,6 +1,13 @@
 import csv 
 import json 
 import os
+import datetime
+
+def convert_SS_expire_to_date_time(original):
+    if (len(original) != 0):
+        return str(datetime.datetime.strptime(original, "%m/%d/%Y"))
+    else:
+        return ""
 
 def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
     temp = csvFilePath.split('.')
@@ -26,6 +33,12 @@ def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
             keys.append(key)
             # we need an additional field for last name converted to lowercase
             rows['Lowercase Last Name'] = (rows['Last Name']).lower()
+            # and first name
+            rows['Lowercase First Name'] = (rows['First Name']).lower()
+            # and convert dates in wrong format to datetime
+            rows['SafeSport Expires'] = convert_SS_expire_to_date_time(rows['SafeSport Expires'])
+            rows['Background Check Expires'] = convert_SS_expire_to_date_time(rows['Background Check Expires'])
+            rows['Expiration'] = convert_SS_expire_to_date_time(rows['Expiration'])
             datanew[key] = rows
 
     try:
