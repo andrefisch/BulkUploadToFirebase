@@ -25,8 +25,8 @@ if (data && (typeof data === "object")) {
             console.log("All documents have been successfully written!");
         });
     });
-    console.log(`${data.size()} documents have been written!`);
 }
+console.log(`${Object.keys(data).length} documents have been written!`);
 
 // // upload referee 1 data
 // if (data1 && (typeof data1 === "object")) {

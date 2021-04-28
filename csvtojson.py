@@ -3,11 +3,33 @@ import json
 import os
 import datetime
 
-def convert_SS_expire_to_date_time(original):
+def convert_LM_to_date_time(original):
     if (len(original) != 0):
+        # Currently needs to convert to a string or else json gets
+        # Make sure to just parse DateTime on other side as the other way is too complicated
+        return str(datetime.datetime.strptime(original, "%Y-%m-%d %H:%M:%S"))
+    else:
+        return ""
+
+def convert_ALL_OTHERS_to_date_time(original):
+    if (len(original) != 0):
+        # Currently needs to convert to a string or else json gets
+        # Make sure to just parse DateTime on other side as the other way is too complicated
         return str(datetime.datetime.strptime(original, "%m/%d/%Y"))
     else:
         return ""
+
+def convert_yes_no_to_bool(original):
+    if (len(original) != 0):
+        if (original.lower() == 'no' or original.lower() == 'non-competitive'):
+            return False
+        elif (original.lower() == 'yes' or original.lower() == 'competitive'):
+            return True
+        else:
+            return False
+    else:
+        return False
+
 
 def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
     temp = csvFilePath.split('.')
@@ -32,13 +54,22 @@ def convert_csv_to_json(csvFilePath, oldCsvFilePath, memberString):
             key = rows[memberString]
             keys.append(key)
             # we need an additional field for last name converted to lowercase
-            rows['Lowercase Last Name'] = (rows['Last Name']).lower()
-            # and first name
-            rows['Lowercase First Name'] = (rows['First Name']).lower()
-            # and convert dates in wrong format to datetime
-            rows['SafeSport Expires'] = convert_SS_expire_to_date_time(rows['SafeSport Expires'])
-            rows['Background Check Expires'] = convert_SS_expire_to_date_time(rows['Background Check Expires'])
-            rows['Expiration'] = convert_SS_expire_to_date_time(rows['Expiration'])
+            rows['searchName'] = (rows['Last Name']).lower()
+
+            # and convert dates in wrong format to string object datetime format
+            rows['Last Modified'] = convert_LM_to_date_time(rows['Last Modified'])
+
+            rows['SafeSport Expires'] = convert_ALL_OTHERS_to_date_time(rows['SafeSport Expires'])
+            rows['Background Check Expires'] = convert_ALL_OTHERS_to_date_time(rows['Background Check Expires'])
+            rows['Expiration'] = convert_ALL_OTHERS_to_date_time(rows['Expiration'])
+            
+            # bool changes
+            rows['Birthdate verified'] = convert_yes_no_to_bool(rows['Birthdate verified'])
+            rows['CheckEd'] = convert_yes_no_to_bool(rows['CheckEd'])
+            rows['Competitive'] = convert_yes_no_to_bool(rows['Competitive'])
+            rows['US Citizen'] = convert_yes_no_to_bool(rows['US Citizen'])
+            rows['Permanent Resident'] = convert_yes_no_to_bool(rows['Permanent Resident'])
+            rows['Non-Comp Eligible'] = convert_yes_no_to_bool(rows['Non-Comp Eligible'])
             datanew[key] = rows
 
     try:
